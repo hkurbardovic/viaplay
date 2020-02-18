@@ -1,7 +1,10 @@
 package com.hkurbardovic.viaplay.di
 
 import com.hkurbardovic.viaplay.app.ViaplayApp
-import com.hkurbardovic.viaplay.di.modules.*
+import com.hkurbardovic.viaplay.di.modules.ActivityBindingModule
+import com.hkurbardovic.viaplay.di.modules.ContextModule
+import com.hkurbardovic.viaplay.di.modules.DatabaseModule
+import com.hkurbardovic.viaplay.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,10 +17,8 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         ContextModule::class,
         NetworkModule::class,
-        OkHttpClientModule::class,
         DatabaseModule::class,
-        ActivityBindingModule::class,
-        FragmentBindingModule::class
+        ActivityBindingModule::class
     ]
 )
 interface AppComponent : AndroidInjector<ViaplayApp> {

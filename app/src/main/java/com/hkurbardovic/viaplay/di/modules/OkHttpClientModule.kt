@@ -1,7 +1,6 @@
 package com.hkurbardovic.viaplay.di.modules
 
 import android.content.Context
-import com.hkurbardovic.viaplay.network.connectivity.ConnectivityInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -11,19 +10,17 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module(includes = [ContextModule::class])
+@Module
 class OkHttpClientModule {
 
     @Provides
     @Singleton
     fun okHttpClient(
         cache: Cache,
-        httpLoggingInterceptor: HttpLoggingInterceptor,
-        context: Context
+        httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(cache)
-            .addInterceptor(ConnectivityInterceptor(context))
             .addInterceptor(httpLoggingInterceptor)
             .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)

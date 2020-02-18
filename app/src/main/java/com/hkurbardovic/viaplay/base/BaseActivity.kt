@@ -1,6 +1,8 @@
 package com.hkurbardovic.viaplay.base
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.hkurbardovic.viaplay.R
 import com.hkurbardovic.viaplay.utilities.inTransaction
 import dagger.android.support.DaggerAppCompatActivity
@@ -27,5 +29,9 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         supportFragmentManager.inTransaction {
             replace(R.id.fragment_container, fragment)
         }
+    }
+
+    fun showMessage(message: String, coordinatorLayout: CoordinatorLayout) {
+        Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_SHORT).show()
     }
 }

@@ -7,22 +7,29 @@
         <import type="android.view.View" />
 
         <variable
+            name="sectionDetails"
+            type="com.hkurbardovic.viaplay.database.models.SectionDetails" />
+
+        <variable
             name="isLoading"
             type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:focusable="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:padding="@dimen/item_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:sectionDetailsData="@{sectionDetails}" />
 
         <ProgressBar
             android:layout_width="wrap_content"

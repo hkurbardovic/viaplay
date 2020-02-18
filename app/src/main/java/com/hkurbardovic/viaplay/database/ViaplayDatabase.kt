@@ -5,15 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.hkurbardovic.viaplay.database.daos.SectionDao
+import com.hkurbardovic.viaplay.database.daos.SectionDetailsDao
 import com.hkurbardovic.viaplay.database.models.Section
+import com.hkurbardovic.viaplay.database.models.SectionDetails
 
 /**
  * The Room database for this app
  */
-@Database(entities = [Section::class], version = 1, exportSchema = false)
+@Database(entities = [Section::class, SectionDetails::class], version = 1, exportSchema = false)
 abstract class ViaplayDatabase : RoomDatabase() {
 
     abstract fun sectionDao(): SectionDao
+
+    abstract fun sectionDetailsDao(): SectionDetailsDao
 
     companion object {
 

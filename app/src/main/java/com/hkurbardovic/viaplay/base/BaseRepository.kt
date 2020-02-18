@@ -10,9 +10,10 @@ abstract class BaseRepository {
         errorMessage: String,
         generalErrorMessage: String
     ) {
-        errorMessageMutableLiveData.value =
+        errorMessageMutableLiveData.postValue(
             if (errorMessage.isNotBlank()) Event(errorMessage) else Event(
                 generalErrorMessage
             )
+        )
     }
 }

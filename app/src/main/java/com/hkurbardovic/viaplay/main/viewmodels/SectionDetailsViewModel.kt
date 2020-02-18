@@ -7,18 +7,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SectionsViewModel @Inject constructor(private val repository: SectionsRepository) :
+class SectionDetailsViewModel @Inject constructor(private val repository: SectionsRepository) :
     ViewModel() {
 
-    val sectionsLiveData = repository.sectionsLiveData
+    val sectionDetailsLiveData = repository.sectionDetailsLiveData
 
     val errorMessageLiveData = repository.errorMessageLiveData
 
     val isLoadingLiveData = repository.isLoadingLiveData
 
-    fun getSections() {
+    fun getSectionDetails(href: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getSections()
+            repository.getSectionDetails(href)
         }
+    }
+
+    fun postSectionIdValue(id: String) {
+        repository.postSectionIdValue(id)
     }
 }

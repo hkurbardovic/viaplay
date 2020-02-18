@@ -9,11 +9,12 @@ import androidx.lifecycle.observe
 import com.hkurbardovic.viaplay.adapters.SectionAdapter
 import com.hkurbardovic.viaplay.base.BaseFragment
 import com.hkurbardovic.viaplay.databinding.FragmentSectionsBinding
+import com.hkurbardovic.viaplay.main.MainActivity
 import com.hkurbardovic.viaplay.main.viewmodels.SectionsViewModel
 import com.hkurbardovic.viaplay.main.viewmodels.SectionsViewModelFactory
 import javax.inject.Inject
 
-class SectionsFragment : BaseFragment() {
+class SectionsFragment : BaseFragment(), MainActivity.NetworkListener {
 
     private lateinit var binding: FragmentSectionsBinding
 
@@ -31,14 +32,22 @@ class SectionsFragment : BaseFragment() {
     ): View? {
         binding = FragmentSectionsBinding.inflate(inflater, container, false)
 
-        val adapter = SectionAdapter()
-        binding.recyclerView.adapter = adapter
+        val context = context ?: return binding.root
 
-        sectionsViewModel.getSections()
+        (context as MainActivity).setNetworkListener(this)
+
+        val adapter = SectionAdapter(context)
+        binding.recyclerView.adapter = adapter
 
         observeLiveData(adapter)
 
+        getSections()
+
         return binding.root
+    }
+
+    override fun onAvailable() {
+        getSections()
     }
 
     private fun observeLiveData(adapter: SectionAdapter) {
@@ -47,8 +56,16 @@ class SectionsFragment : BaseFragment() {
         }
 
         sectionsViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
-            println()
+            handleError(it)
         }
+
+        sectionsViewModel.isLoadingLiveData.observe(viewLifecycleOwner) {
+            binding.isLoading = it
+        }
+    }
+
+    private fun getSections() {
+        sectionsViewModel.getSections()
     }
 
     companion object {
