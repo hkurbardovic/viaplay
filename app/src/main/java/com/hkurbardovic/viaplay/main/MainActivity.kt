@@ -8,8 +8,12 @@ import com.hkurbardovic.viaplay.databinding.ActivityMainBinding
 import com.hkurbardovic.viaplay.handlers.network.NetworkConnectivityChangeHandler
 import com.hkurbardovic.viaplay.handlers.network.NetworkConnectivityChangeListener
 import com.hkurbardovic.viaplay.main.fragments.SectionsFragment
+import javax.inject.Inject
 
 class MainActivity : BaseActivity(), NetworkConnectivityChangeListener {
+
+    @Inject
+    lateinit var networkConnectivityChangeHandler: NetworkConnectivityChangeHandler
 
     private lateinit var binding: ActivityMainBinding
 
@@ -33,7 +37,6 @@ class MainActivity : BaseActivity(), NetworkConnectivityChangeListener {
     }
 
     private fun registerNetworkListener() {
-        val networkConnectivityChangeHandler = NetworkConnectivityChangeHandler(this)
         networkConnectivityChangeHandler.setCallback(this)
     }
 

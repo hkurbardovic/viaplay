@@ -6,8 +6,9 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import timber.log.Timber
+import javax.inject.Inject
 
-class NetworkConnectivityChangeHandler(private val context: Context) :
+class NetworkConnectivityChangeHandler @Inject constructor(private val context: Context) :
     NetworkConnectivityChangeListener {
 
     private lateinit var networkConnectivityChangeListener: NetworkConnectivityChangeListener
