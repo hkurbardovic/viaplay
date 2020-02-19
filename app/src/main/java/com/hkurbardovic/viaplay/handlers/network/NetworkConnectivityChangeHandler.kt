@@ -8,18 +8,9 @@ import android.net.NetworkRequest
 import timber.log.Timber
 import javax.inject.Inject
 
-class NetworkConnectivityChangeHandler @Inject constructor(private val context: Context) :
-    NetworkConnectivityChangeListener {
+class NetworkConnectivityChangeHandler @Inject constructor(private val context: Context) {
 
     private lateinit var networkConnectivityChangeListener: NetworkConnectivityChangeListener
-
-    override fun onLost() {
-        networkConnectivityChangeListener.onLost()
-    }
-
-    override fun onAvailable() {
-        networkConnectivityChangeListener.onAvailable()
-    }
 
     fun setCallback(networkConnectivityChangeListener: NetworkConnectivityChangeListener) {
         this.networkConnectivityChangeListener = networkConnectivityChangeListener
